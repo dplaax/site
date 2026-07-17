@@ -81,11 +81,24 @@ The apex record belongs to the namespace publishing setup (`dplaax/spec`), not h
 2. Add repo secrets: `AWS_ROLE_TO_ASSUME`, `AWS_REGION`, `S3_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`.
 3. Change `if: false` to `if: github.ref == 'refs/heads/main'`.
 
-## Manual deploy fallback
+## Manual deploy
+
+Use the repo Makefile — it builds, syncs with the split cache-control policy
+described above, and invalidates:
+
+```bash
+AWS_PROFILE=<profile> make deploy CLOUDFRONT_DISTRIBUTION_ID=<DIST_ID>
+AWS_PROFILE=<profile> make deploy DRY=1   # dry-run first
+```
+
+Raw equivalent:
 
 ```bash
 npm run build
-aws s3 sync ./dist s3://www.dplaax.dev --delete
+aws s3 sync ./dist s3://www.dplaax.dev --delete --exclude "_astro/*" \
+  --cache-control "public, max-age=300, must-revalidate"
+aws s3 sync ./dist/_astro s3://www.dplaax.dev/_astro --delete \
+  --cache-control "public, max-age=31536000, immutable"
 aws cloudfront create-invalidation --distribution-id <DIST_ID> --paths "/*"
 ```
 
