@@ -19,7 +19,13 @@ export default defineConfig({
       ja: 'en',
     },
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // The i18n fallback materializes /ja/404 as a noindex redirect stub;
+      // neither it nor /404 belongs in the sitemap.
+      filter: (page) => !page.includes('/404'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

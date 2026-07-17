@@ -9,9 +9,10 @@ interface Props {
   locale: Locale;
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
-const { locale, title, description } = Astro.props;
+const { locale, title, description, noindex = false } = Astro.props;
 const pathname = Astro.url.pathname;
 const pageTitle = title ?? t(locale, 'site.title');
 const pageDesc = description ?? t(locale, 'site.description');
@@ -24,9 +25,14 @@ const selfHref = new URL(pathname, Astro.site ?? Astro.url).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Scroll-reveal styles are gated on html.js so content stays visible without JavaScript. -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={selfHref} />
     <link rel="alternate" hreflang={locale} href={selfHref} />
     <link rel="alternate" hreflang={otherLocale(locale)} href={altHref} />
@@ -41,7 +47,7 @@ const selfHref = new URL(pathname, Astro.site ?? Astro.url).toString();
     <meta property="og:description" content={pageDesc} />
     <meta property="og:url" content={selfHref} />
     <meta property="og:locale" content={locale === 'ja' ? 'ja_JP' : 'en_US'} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
   </head>
   <body>
     <Header locale={locale} pathname={pathname} />

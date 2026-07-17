@@ -13,7 +13,7 @@ export function getLocaleFromUrl(url: URL): Locale {
 export function localizedPath(locale: Locale, path: string): string {
   const clean = path.startsWith('/') ? path : `/${path}`;
   if (locale === defaultLocale) {
-    return clean === '/' ? '/' : clean;
+    return clean;
   }
   return clean === '/' ? `/${locale}` : `/${locale}${clean}`;
 }

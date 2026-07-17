@@ -26,8 +26,13 @@ All copy — both locales — lives in [src/i18n/ui.ts](src/i18n/ui.ts) as typed
 
 - All styling goes through Tailwind v4 utilities backed by CSS tokens in `src/styles/global.css`.
 - Color tokens: `bg-base`, `bg-elev-1`, `bg-elev-2`, `fg-strong`, `fg-primary`, `fg-muted`, `accent-blue`, `accent-violet`, `border-subtle`, `border-strong`.
+- Gradient text (headings' off-white → blue paint) is the `.text-gradient` class (h1–h4 get it automatically). Color tokens like `text-fg-strong` stay plain colors — don't overload them with gradient paint; the transparent text-fill swallows anything relying on `currentColor`.
 - No CSS-in-JS. No Lottie. No Framer Motion. No GSAP. Animations are CSS + the Intersection Observer in `BaseLayout.astro` only.
 - Diagrams are inline SVG components (e.g. `src/components/LineDiagram.astro`) — text-editable, no binary assets.
+
+### Dependencies
+
+- `vite` is a **deliberate** direct devDependency: `@tailwindcss/vite`'s peer range spans vite majors, so a fresh install without the pin can resolve a different vite major than the one `astro` bundles (7 vs 8) — `astro check` then fails with plugin type mismatches. When upgrading astro, keep the pin aligned with astro's own vite major.
 
 ### Constraints
 

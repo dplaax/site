@@ -24,7 +24,9 @@ Route 53                    CloudFront                     S3
 www.dplaax.dev  ──ALIAS──▶  Distribution  ──OAC──▶  s3://www.dplaax.dev
                                 │                    (private bucket)
                                 └─ viewer-request ─▶ cloudfront-function.js
-                                    (/ → Accept-Language → /ja 302)
+                                    (/ → Accept-Language → /ja 302,
+                                     trailing-slash 301,
+                                     clean URL → /index.html rewrite)
 
 dplaax.dev (apex) ─────────▶  NOT this distribution (see above)
 ```
@@ -42,13 +44,23 @@ Deploy artifacts are the contents of `./dist` after `npm run build`.
 ## CloudFront distribution
 
 - Origin: the S3 bucket above, accessed via Origin Access Control (OAC)
-- Default root object: `index.html`
+- Default root object: `index.html` — note this covers **only** `/`; every other
+  clean URL (`/ja`) relies on the viewer-request function's `/index.html` rewrite.
+  Without the function attached, all subpaths 403 → 404.
 - Behaviours:
-  - Default (`*`): cache by URL only, GET/HEAD; viewer-request → `cloudfront-function.js`
+  - Default (`*`): GET/HEAD; viewer-request → `cloudfront-function.js`
+  - Cache policy: cache by URL path, **query strings excluded from the cache key**
+    (the `lang` parameter is a viewer-request signal for the locale redirect only;
+    with query strings excluded, `/?lang=en` serves the cached `/` object)
   - Compress objects: on
   - HTTP/2 + HTTP/3
 - Custom error responses:
-  - `403`/`404` → `/404.html` (Astro emits this from the build)
+  - `403`/`404` → `/404.html` **with response code 404** (Astro emits the page
+    from the build; returning 200 here would turn every missing URL into a
+    soft-404 with a live canonical tag)
+- Recommended (optional): response headers policy with HSTS; long
+  `Cache-Control` for `/_astro/*` (content-hashed → `public, max-age=31536000, immutable`),
+  short for HTML — set via S3 object metadata at sync time or a CloudFront policy
 - TLS: ACM certificate in `us-east-1` for `www.dplaax.dev`
 - Alternate domain names (CNAMEs): `www.dplaax.dev` only — the apex is intentionally absent
 
@@ -82,7 +94,7 @@ aws cloudfront create-invalidation --distribution-id <DIST_ID> --paths "/*"
 ```bash
 aws cloudfront create-function \
   --name dplaax-locale-redirect \
-  --function-config Comment="Redirect / to /ja when Accept-Language is ja",Runtime=cloudfront-js-2.0 \
+  --function-config Comment="Locale redirect + trailing-slash normalize + clean-URL index rewrite",Runtime=cloudfront-js-2.0 \
   --function-code fileb://infra/cloudfront-function.js
 # Then publish + attach to the default cache behaviour as viewer-request.
 ```
