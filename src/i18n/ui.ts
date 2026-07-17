@@ -19,7 +19,7 @@ const strings = {
     'hero.epigraph': 'Continuous, verifiable data provenance',
     'hero.tagline': 'Verify how data was handled before acting on it.',
     'hero.lead':
-      'dPLaaX keeps a tamper-evident record connected as data moves across systems and organizations. A recipient can evaluate the handling path at the moment of use; when something goes wrong, the same record shows where to investigate and which organization signed the record for each step.',
+      'dPLaaX ("data PipeLine as a X") is a protocol for data provenance via the data pipeline: it keeps a tamper-evident record connected as data moves across systems and organizations. A recipient can evaluate the handling path at the moment of use; when something goes wrong, the same record shows where to investigate and which organization signed the record for each step.',
     'cta.spec': 'Read the spec',
     'cta.concept': 'Why continuous provenance',
     'outcome.heading': 'What continuous provenance makes possible',
@@ -120,7 +120,7 @@ const strings = {
     'hero.epigraph': '連続した、検証可能なデータ来歴',
     'hero.tagline': 'データを使う前に、誰がどう扱ったかを検証する。',
     'hero.lead':
-      'dPLaaX は、データが組織やシステムを移動しても、改ざん検出可能な取り扱い記録を切れ目なくつなぐ。受け手は利用時点でその経路を評価でき、問題が起きたときは同じ記録から調査すべき箇所と各段階の記録に署名した組織をたどれる。',
+      'dPLaaX（"data PipeLine as a X"）は、データパイプラインを通じて来歴を証明するプロトコル。データが組織やシステムを移動しても、改ざん検出可能な取り扱い記録を切れ目なくつなぐ。受け手は利用時点でその経路を評価でき、問題が起きたときは同じ記録から調査すべき箇所と各段階の記録に署名した組織をたどれる。',
     'cta.spec': '仕様を読む',
     'cta.concept': 'なぜ連続した来歴が必要か',
     'outcome.heading': '連続した来歴によって、できるようになること',
