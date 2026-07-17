@@ -1,6 +1,6 @@
 # dPLaaX Site
 
-Source for the public-facing site of **dPLaaX** (proving the line, not the points) at <https://www.dplaax.dev>.
+Source for the public-facing site of **dPLaaX** (verifiable provenance across boundaries) at <https://www.dplaax.dev>.
 
 The normative dPLaaX specification lives at <https://github.com/dplaax/spec>. This repository is presentation only — nothing here is normative.
 
