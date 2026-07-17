@@ -1,7 +1,6 @@
 ---
 import { conceptLink, links, t, type Locale } from '~/i18n/ui';
 import LineDiagram from '~/components/LineDiagram.astro';
-import MarkWatermark from '~/components/MarkWatermark.astro';
 
 interface Props {
   locale: Locale;
@@ -11,14 +10,7 @@ const { locale } = Astro.props;
 ---
 
 <!-- Hero -->
-<section class="container-page relative overflow-hidden pt-20 pb-16 md:pt-28 md:pb-20">
-  {
-    /* No negative z-index: body paints its own background above z<0 layers, which
-      would hide the mark. At this opacity it can safely sit above the text flow. */
-  }
-  <MarkWatermark
-    class="text-fg-strong/5 pointer-events-none absolute -top-4 right-0 h-[24rem] w-auto md:right-10 md:h-[30rem]"
-  />
+<section class="container-page pt-20 pb-16 md:pt-28 md:pb-20">
   <p class="text-fg-muted max-w-(--container-prose) font-mono text-sm">
     {t(locale, 'hero.epigraph')}
   </p>
@@ -45,18 +37,72 @@ const { locale } = Astro.props;
   </div>
 </section>
 
+<!-- Outcomes -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'outcome.heading')}</h2>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">
+    {t(locale, 'outcome.lead')}
+  </p>
+  <div class="mt-8 grid gap-6 md:grid-cols-2">
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <h3>{t(locale, 'outcome.gate.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'outcome.gate.body')}</p>
+    </article>
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <h3>{t(locale, 'outcome.investigate.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'outcome.investigate.body')}</p>
+    </article>
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <h3>{t(locale, 'outcome.audit.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'outcome.audit.body')}</p>
+    </article>
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <h3>{t(locale, 'outcome.federation.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'outcome.federation.body')}</p>
+    </article>
+  </div>
+</section>
+
+<!-- Separate records vs continuous provenance -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'line.heading')}</h2>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">{t(locale, 'line.body')}</p>
+  <div class="mt-8">
+    <LineDiagram locale={locale} />
+  </div>
+  <aside
+    class="border-accent-blue bg-bg-elev-1 mt-8 max-w-(--container-prose) border-l-4 px-6 py-5"
+  >
+    <h3 class="text-lg">{t(locale, 'line.asymmetry.heading')}</h3>
+    <p class="text-fg-primary mt-3 text-sm">{t(locale, 'line.asymmetry.body')}</p>
+  </aside>
+</section>
+
 <!-- What -->
 <section class="container-page reveal py-14 md:py-16">
   <h2>{t(locale, 'what.heading')}</h2>
   <p class="text-fg-primary mt-4 max-w-(--container-prose)">{t(locale, 'what.body')}</p>
 </section>
 
-<!-- Points vs line -->
+<!-- Verification mechanism -->
 <section class="container-page reveal py-14 md:py-16">
-  <h2>{t(locale, 'line.heading')}</h2>
-  <p class="text-fg-primary mt-4 max-w-(--container-prose)">{t(locale, 'line.body')}</p>
-  <div class="mt-8">
-    <LineDiagram locale={locale} />
+  <h2>{t(locale, 'value.heading')}</h2>
+  <div class="mt-8 grid gap-6 md:grid-cols-3">
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <p class="text-accent-blue font-mono text-xs">01</p>
+      <h3 class="mt-3">{t(locale, 'value.signature.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'value.signature.body')}</p>
+    </article>
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <p class="text-accent-blue font-mono text-xs">02</p>
+      <h3 class="mt-3">{t(locale, 'value.continuity.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'value.continuity.body')}</p>
+    </article>
+    <article class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+      <p class="text-accent-blue font-mono text-xs">03</p>
+      <h3 class="mt-3">{t(locale, 'value.federation.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'value.federation.body')}</p>
+    </article>
   </div>
 </section>
 
@@ -78,8 +124,45 @@ const { locale } = Astro.props;
     </li>
   </ul>
   <p class="text-fg-muted mt-6 max-w-(--container-prose) text-sm">
+    {t(locale, 'promises.trust')}
+  </p>
+  <p class="text-fg-muted mt-3 max-w-(--container-prose) text-sm">
     {t(locale, 'promises.complement')}
   </p>
+</section>
+
+<!-- Research -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'research.heading')}</h2>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">
+    {t(locale, 'research.lead')}
+  </p>
+  <div class="mt-8 grid gap-6 md:grid-cols-3">
+    <a
+      href={links.paperProvenance}
+      class="border-border-subtle hover:border-border-strong block rounded-xl border p-6"
+    >
+      <h3 class="text-lg">{t(locale, 'research.dplaax.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'research.dplaax.desc')}</p>
+      <p class="text-accent-blue mt-4 font-mono text-xs">DOI 10.5281/zenodo.20042030</p>
+    </a>
+    <a
+      href={links.w3cProv}
+      class="border-border-subtle hover:border-border-strong block rounded-xl border p-6"
+    >
+      <h3 class="text-lg">{t(locale, 'research.prov.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'research.prov.desc')}</p>
+      <p class="text-accent-blue mt-4 font-mono text-xs">w3.org/TR/prov-primer</p>
+    </a>
+    <a
+      href={links.paperDecision}
+      class="border-border-subtle hover:border-border-strong block rounded-xl border p-6"
+    >
+      <h3 class="text-lg">{t(locale, 'research.decision.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'research.decision.desc')}</p>
+      <p class="text-accent-blue mt-4 font-mono text-xs">DOI 10.1109/ACCESS.2018.2887201</p>
+    </a>
+  </div>
 </section>
 
 <!-- Ecosystem -->
