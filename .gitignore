@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# machine-local deploy config (see local.mk.example)
+local.mk
+
 # macOS-specific files
 .DS_Store
 

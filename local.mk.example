@@ -1,0 +1,7 @@
+# Machine-local deploy config. Copy to local.mk (gitignored) and fill in.
+#
+# Plain `:=` on purpose: the repo-local value must beat any AWS_PROFILE
+# your shell happens to export. `make deploy AWS_PROFILE=...` still wins.
+
+AWS_PROFILE := your-profile
+CLOUDFRONT_DISTRIBUTION_ID := E000000000000

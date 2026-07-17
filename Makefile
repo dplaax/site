@@ -1,17 +1,27 @@
 # Deploy www.dplaax.dev to S3 (+ optional CloudFront invalidation).
 #
+# Setup (once): cp local.mk.example local.mk and fill in AWS_PROFILE /
+# CLOUDFRONT_DISTRIBUTION_ID. local.mk is gitignored — machine-local config.
+#
 # Usage:
-#   AWS_PROFILE=<profile> make deploy                  # build + sync + invalidate
-#   AWS_PROFILE=<profile> make deploy DRY=1            # show what would sync, change nothing
-#   AWS_PROFILE=<profile> make deploy CLOUDFRONT_DISTRIBUTION_ID=E123ABC
+#   make deploy                # build + sync + invalidate (config from local.mk)
+#   make deploy DRY=1          # show what would sync, change nothing
+#   AWS_PROFILE=<p> make deploy CLOUDFRONT_DISTRIBUTION_ID=E123ABC   # without local.mk
 #
 # AWS_PROFILE is required on purpose — refusing to fall back to the default
 # profile keeps a stray `make deploy` from touching the wrong account.
+# Precedence: make CLI args > local.mk > shell environment — a profile
+# exported by your shell never silently wins over the repo-local config.
 # Topology and one-time setup: infra/deploy.md.
+
+-include local.mk
 
 S3_BUCKET ?= www.dplaax.dev
 CLOUDFRONT_DISTRIBUTION_ID ?=
 DRY ?=
+
+# Recipes (aws CLI) read AWS_PROFILE from the environment.
+export AWS_PROFILE
 
 SYNC_FLAGS := $(if $(DRY),--dryrun,)
 
