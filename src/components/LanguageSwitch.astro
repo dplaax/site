@@ -1,0 +1,20 @@
+---
+import { localeNames, t, type Locale } from '~/i18n/ui';
+import { alternatePath, otherLocale } from '~/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+const target = otherLocale(locale);
+---
+
+<a
+  href={alternatePath(locale, pathname)}
+  aria-label={t(locale, 'lang.switchTo')}
+  class="border-border-strong text-fg-muted hover:text-fg-primary rounded-full border px-3 py-1 text-xs"
+>
+  {localeNames[target]}
+</a>

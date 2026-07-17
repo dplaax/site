@@ -1,0 +1,112 @@
+---
+import { conceptLink, links, t, type Locale } from '~/i18n/ui';
+import LineDiagram from '~/components/LineDiagram.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<!-- Hero -->
+<section class="container-page pt-20 pb-16 md:pt-28 md:pb-20">
+  <p class="text-fg-muted max-w-(--container-prose) font-mono text-sm">
+    {t(locale, 'hero.epigraph')}
+  </p>
+  <h1 class="mt-6">dPLaaX</h1>
+  <p class="text-fg-strong mt-4 text-xl font-semibold md:text-2xl">
+    {t(locale, 'hero.tagline')}
+  </p>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">
+    {t(locale, 'hero.lead')}
+  </p>
+  <div class="mt-8 flex flex-wrap gap-3">
+    <a
+      href={links.spec}
+      class="bg-accent-blue text-bg-base rounded-full px-5 py-2 text-sm font-medium"
+    >
+      {t(locale, 'cta.spec')}
+    </a>
+    <a
+      href={conceptLink(locale)}
+      class="border-border-strong text-fg-primary rounded-full border px-5 py-2 text-sm"
+    >
+      {t(locale, 'cta.concept')}
+    </a>
+  </div>
+</section>
+
+<!-- What -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'what.heading')}</h2>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">{t(locale, 'what.body')}</p>
+</section>
+
+<!-- Points vs line -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'line.heading')}</h2>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">{t(locale, 'line.body')}</p>
+  <div class="mt-8">
+    <LineDiagram locale={locale} />
+  </div>
+</section>
+
+<!-- Promises -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'promises.heading')}</h2>
+  <ul class="mt-6 max-w-(--container-prose) space-y-4">
+    <li class="flex gap-3">
+      <span class="text-accent-blue font-mono" aria-hidden="true">✓</span>
+      <span>{t(locale, 'promises.yes1')}</span>
+    </li>
+    <li class="flex gap-3">
+      <span class="text-fg-muted font-mono" aria-hidden="true">✕</span>
+      <span>{t(locale, 'promises.no1')}</span>
+    </li>
+    <li class="flex gap-3">
+      <span class="text-fg-muted font-mono" aria-hidden="true">✕</span>
+      <span>{t(locale, 'promises.no2')}</span>
+    </li>
+  </ul>
+  <p class="text-fg-muted mt-6 max-w-(--container-prose) text-sm">
+    {t(locale, 'promises.complement')}
+  </p>
+</section>
+
+<!-- Ecosystem -->
+<section class="container-page reveal py-14 md:py-16">
+  <h2>{t(locale, 'ecosystem.heading')}</h2>
+  <div class="mt-6 grid gap-6 md:grid-cols-2">
+    <a
+      href={links.spec}
+      class="border-border-subtle bg-bg-elev-1 hover:border-border-strong block rounded-xl border p-6"
+    >
+      <h3>{t(locale, 'ecosystem.spec.title')}</h3>
+      <p class="text-fg-muted mt-2 text-sm">{t(locale, 'ecosystem.spec.desc')}</p>
+      <p class="text-accent-blue mt-4 font-mono text-xs">github.com/dplaax/spec</p>
+    </a>
+    <a
+      href={links.provin}
+      class="border-border-subtle bg-bg-elev-1 hover:border-border-strong block rounded-xl border p-6"
+    >
+      <h3>{t(locale, 'ecosystem.provin.title')}</h3>
+      <p class="text-fg-muted mt-2 text-sm">{t(locale, 'ecosystem.provin.desc')}</p>
+      <p class="text-accent-blue mt-4 font-mono text-xs">github.com/provin-line</p>
+    </a>
+  </div>
+</section>
+
+<!-- Status -->
+<section class="container-page reveal py-14 md:py-20">
+  <h2>{t(locale, 'status.heading')}</h2>
+  <p class="text-fg-primary mt-4 max-w-(--container-prose)">{t(locale, 'status.body')}</p>
+  <div class="mt-8">
+    <a
+      href={links.contributing}
+      class="border-border-strong text-fg-primary rounded-full border px-5 py-2 text-sm"
+    >
+      {t(locale, 'status.cta')}
+    </a>
+  </div>
+</section>

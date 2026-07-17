@@ -1,0 +1,20 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { t } from '~/i18n/ui';
+
+// A single 404.html serves both locales (CloudFront maps 403/404 here),
+// so the page shows both languages instead of guessing the visitor's.
+---
+
+<BaseLayout locale="en" title="404 — dPLaaX">
+  <section class="container-page py-24 text-center md:py-32">
+    <p class="text-fg-muted font-mono text-sm">404</p>
+    <h1 class="mt-4">{t('en', 'notFound.title')}</h1>
+    <p class="text-fg-primary mt-4">{t('en', 'notFound.body')}</p>
+    <p class="text-fg-muted mt-1" lang="ja">{t('ja', 'notFound.body')}</p>
+    <div class="mt-8 flex justify-center gap-4 text-sm">
+      <a href="/">{t('en', 'notFound.back')}</a>
+      <a href="/ja" lang="ja">{t('ja', 'notFound.back')}</a>
+    </div>
+  </section>
+</BaseLayout>
