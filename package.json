@@ -1,7 +1,7 @@
 {
   "name": "site",
   "description": "dPLaaX public-facing site source (https://www.dplaax.dev)",
-  "author": "1o1 Co. Ltd.",
+  "author": "The dPLaaX Authors",
   "license": "Apache-2.0",
   "type": "module",
   "version": "0.0.1",
