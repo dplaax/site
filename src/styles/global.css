@@ -1,18 +1,22 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-bg-base: #0a0c12;
-  --color-bg-elev-1: #131622;
-  --color-bg-elev-2: #1b1f2e;
-  /* Softened off-white instead of pure #fff: pure white on the near-black base
-     causes halation (the harsh shimmer / edge vibration on bold headings). */
-  --color-fg-strong: #ecedf4;
-  --color-fg-primary: #e1e3ec;
-  --color-fg-muted: #99a0b4;
-  --color-accent-blue: #6f9dff;
-  --color-accent-violet: #8b6dff;
-  --color-border-subtle: #202432;
-  --color-border-strong: #383e54;
+  /* Light, c2pa.org-inspired surface language: white base, near-black text
+     (matching the logo's #2c2c2c), flat surfaces, thin gray borders.
+     The `inverse` tokens are for the dark footer band. */
+  --color-bg-base: #ffffff;
+  --color-bg-elev-1: #f6f7f9;
+  --color-bg-elev-2: #edeff3;
+  --color-bg-inverse: #2c2c2c;
+  --color-fg-strong: #2c2c2c;
+  --color-fg-primary: #40454f;
+  --color-fg-muted: #6e7580;
+  --color-fg-inverse: #f5f6f8;
+  --color-fg-inverse-muted: #b9bec8;
+  --color-accent-blue: #2f6ce0;
+  --color-accent-violet: #6d4de0;
+  --color-border-subtle: #e6e8ec;
+  --color-border-strong: #c9cdd5;
 
   --font-sans:
     'Inter', system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', sans-serif;
@@ -32,18 +36,7 @@
   }
 
   body {
-    /* One continuous vertical gradient spanning the whole page so sections flow
-       into each other instead of reading as flat, bordered blocks. Stays within
-       the existing base <-> elev-1 tonal range — same color feel, just connected. */
     background-color: var(--color-bg-base);
-    background-image: linear-gradient(
-      180deg,
-      #0a0c12 0%,
-      #131622 28%,
-      #0c0e15 52%,
-      #131622 76%,
-      #0c0e16 100%
-    );
     color: var(--color-fg-primary);
     line-height: 1.7;
     min-height: 100vh;
@@ -78,7 +71,7 @@
   }
 
   a:hover {
-    opacity: 0.85;
+    opacity: 0.8;
   }
 
   code,
@@ -88,7 +81,7 @@
 
   ::selection {
     background-color: var(--color-accent-blue);
-    color: var(--color-bg-base);
+    color: #ffffff;
   }
 }
 
@@ -128,20 +121,4 @@
       transition: none;
     }
   }
-}
-
-/* Headings and .text-gradient are painted with the off-white -> blue gradient.
-   `.text-fg-strong` stays a plain color utility — the gradient gets its own
-   class because the transparent text-fill silently swallows any child relying
-   on currentColor. Unlayered so it overrides Tailwind color utilities. */
-h1,
-h2,
-h3,
-h4,
-.text-gradient {
-  background-image: linear-gradient(11deg, #ecedf4, #6f9dff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
 }

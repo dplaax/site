@@ -1,6 +1,7 @@
 ---
 import { conceptLink, links, t, type Locale } from '~/i18n/ui';
 import LineDiagram from '~/components/LineDiagram.astro';
+import MarkWatermark from '~/components/MarkWatermark.astro';
 
 interface Props {
   locale: Locale;
@@ -10,12 +11,19 @@ const { locale } = Astro.props;
 ---
 
 <!-- Hero -->
-<section class="container-page pt-20 pb-16 md:pt-28 md:pb-20">
+<section class="container-page relative overflow-hidden pt-20 pb-16 md:pt-28 md:pb-20">
+  {
+    /* No negative z-index: body paints its own background above z<0 layers, which
+      would hide the mark. At this opacity it can safely sit above the text flow. */
+  }
+  <MarkWatermark
+    class="text-fg-strong/5 pointer-events-none absolute -top-4 right-0 h-[24rem] w-auto md:right-10 md:h-[30rem]"
+  />
   <p class="text-fg-muted max-w-(--container-prose) font-mono text-sm">
     {t(locale, 'hero.epigraph')}
   </p>
   <h1 class="mt-6">dPLaaX</h1>
-  <p class="text-gradient mt-4 text-xl font-semibold md:text-2xl">
+  <p class="text-fg-strong mt-4 text-xl font-semibold md:text-2xl">
     {t(locale, 'hero.tagline')}
   </p>
   <p class="text-fg-primary mt-4 max-w-(--container-prose)">
@@ -24,7 +32,7 @@ const { locale } = Astro.props;
   <div class="mt-8 flex flex-wrap gap-3">
     <a
       href={links.spec}
-      class="bg-accent-blue text-bg-base rounded-full px-5 py-2 text-sm font-medium"
+      class="bg-accent-blue rounded-full px-5 py-2 text-sm font-medium text-white"
     >
       {t(locale, 'cta.spec')}
     </a>

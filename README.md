@@ -29,7 +29,7 @@ src/
 ├── layouts/           # BaseLayout
 ├── pages/             # en routes at root, ja routes under /ja
 ├── i18n/              # ui.ts (all copy + links) + utils.ts (locale helpers)
-└── styles/global.css  # Tailwind v4 + CSS tokens (dark theme)
+└── styles/global.css  # Tailwind v4 + CSS tokens (light theme, c2pa.org-inspired)
 
 infra/                 # CloudFront / S3 deployment notes (non-executable)
 ```

@@ -24,9 +24,11 @@ All copy — both locales — lives in [src/i18n/ui.ts](src/i18n/ui.ts) as typed
 
 ### Visual / styling
 
+- The visual language is white-base and c2pa.org-inspired: near-black text (`#2c2c2c`, matching the logo) on white, flat surfaces, thin gray borders, no gradients. The footer is an inverse (dark) band.
 - All styling goes through Tailwind v4 utilities backed by CSS tokens in `src/styles/global.css`.
-- Color tokens: `bg-base`, `bg-elev-1`, `bg-elev-2`, `fg-strong`, `fg-primary`, `fg-muted`, `accent-blue`, `accent-violet`, `border-subtle`, `border-strong`.
-- Gradient text (headings' off-white → blue paint) is the `.text-gradient` class (h1–h4 get it automatically). Color tokens like `text-fg-strong` stay plain colors — don't overload them with gradient paint; the transparent text-fill swallows anything relying on `currentColor`.
+- Color tokens: `bg-base`, `bg-elev-1`, `bg-elev-2`, `bg-inverse`, `fg-strong`, `fg-primary`, `fg-muted`, `fg-inverse`, `fg-inverse-muted`, `accent-blue`, `accent-violet`, `border-subtle`, `border-strong`.
+- Logo files: `logo-dark.svg` on light surfaces (header), `logo-white.svg` on the inverse band (footer). The favicon keeps the mark on a dark tile so it reads on any browser theme.
+- The official 5-square mark appears as a faint background watermark via `MarkWatermark.astro` (currentColor). Keep it subtle — ≤5% opacity on light surfaces, ≤10% on the inverse band — and never give it a negative z-index (the body background would paint over it).
 - No CSS-in-JS. No Lottie. No Framer Motion. No GSAP. Animations are CSS + the Intersection Observer in `BaseLayout.astro` only.
 - Diagrams are inline SVG components (e.g. `src/components/LineDiagram.astro`) — text-editable, no binary assets.
 
