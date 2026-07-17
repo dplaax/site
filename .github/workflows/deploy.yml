@@ -1,0 +1,42 @@
+# Deployment workflow.
+#
+# Disabled until AWS credentials and the CloudFront distribution ID are
+# wired up in repo secrets. To activate, change `if: false` to a real
+# condition (e.g. `if: github.ref == 'refs/heads/main'`) and populate:
+#   - AWS_ROLE_TO_ASSUME       (OIDC role with S3 + CloudFront perms)
+#   - AWS_REGION
+#   - S3_BUCKET                (e.g. www.dplaax.dev)
+#   - CLOUDFRONT_DISTRIBUTION_ID
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: false # disabled — see infra/deploy.md before enabling
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Sync to S3
+        run: aws s3 sync ./dist s3://${{ secrets.S3_BUCKET }} --delete
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"

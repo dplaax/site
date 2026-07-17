@@ -1,0 +1,25 @@
+---
+import { localeNames, t, type Locale } from '~/i18n/ui';
+import { alternatePath, otherLocale } from '~/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+const target = otherLocale(locale);
+const raw = alternatePath(locale, pathname);
+// "/" is the locale-negotiated root: the CloudFront function would bounce a
+// ja-preferring visitor straight back to /ja, so an explicit switch to the
+// default locale carries a `lang` marker the function honors as an override.
+const href = raw === '/' ? `/?lang=${target}` : raw;
+---
+
+<a
+  href={href}
+  aria-label={t(locale, 'lang.switchTo')}
+  class="border-border-strong text-fg-muted hover:text-fg-primary rounded-full border px-3 py-1 text-xs"
+>
+  {localeNames[target]}
+</a>

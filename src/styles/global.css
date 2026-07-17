@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Light, c2pa.org-inspired surface language: white base, near-black text
+     (matching the logo's #2c2c2c), flat surfaces, thin gray borders.
+     The `inverse` tokens are for the dark footer band. */
+  --color-bg-base: #ffffff;
+  --color-bg-elev-1: #f6f7f9;
+  --color-bg-elev-2: #edeff3;
+  --color-bg-inverse: #2c2c2c;
+  --color-fg-strong: #2c2c2c;
+  --color-fg-primary: #40454f;
+  --color-fg-muted: #6e7580;
+  --color-fg-inverse: #f5f6f8;
+  --color-fg-inverse-muted: #b9bec8;
+  --color-accent-blue: #2f6ce0;
+  --color-accent-violet: #6d4de0;
+  --color-border-subtle: #e6e8ec;
+  --color-border-strong: #c9cdd5;
+
+  --font-sans:
+    'Inter', system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, monospace;
+
+  --container-prose: 72ch;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-bg-base);
+    color: var(--color-fg-primary);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-bg-base);
+    color: var(--color-fg-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--color-fg-strong);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 3.75rem);
+  }
+
+  h2 {
+    font-size: clamp(1.625rem, 3vw, 2.25rem);
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+
+  a {
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    transition: opacity 0.15s ease;
+  }
+
+  a:hover {
+    opacity: 0.8;
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background-color: var(--color-accent-blue);
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  .container-page {
+    margin-inline: auto;
+    max-width: 80rem;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Scroll-reveal is a progressive enhancement: the hidden initial state only
+     applies after the inline head script stamps `js` on <html>, so all content
+     stays visible when JavaScript is disabled or fails. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+  }
+
+  html.js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}

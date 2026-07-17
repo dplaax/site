@@ -1,0 +1,32 @@
+---
+import { conceptLink, links, t, type Locale } from '~/i18n/ui';
+import { localizedPath } from '~/i18n/utils';
+import LanguageSwitch from '~/components/LanguageSwitch.astro';
+
+interface Props {
+  locale: Locale;
+  pathname: string;
+}
+
+const { locale, pathname } = Astro.props;
+---
+
+<header class="border-border-subtle bg-bg-base/80 sticky top-0 z-50 border-b backdrop-blur">
+  <div class="container-page flex h-14 items-center justify-between gap-4">
+    <a href={localizedPath(locale, '/')}>
+      <img src="/logo-dark.svg" alt="dPLaaX" class="h-5 w-auto" />
+    </a>
+    <nav class="flex items-center gap-5 text-sm">
+      <a href={links.spec} class="text-fg-muted hover:text-fg-primary hidden sm:inline">
+        {t(locale, 'nav.spec')}
+      </a>
+      <a href={conceptLink(locale)} class="text-fg-muted hover:text-fg-primary hidden sm:inline">
+        {t(locale, 'nav.concept')}
+      </a>
+      <a href={links.org} class="text-fg-muted hover:text-fg-primary">
+        {t(locale, 'nav.github')}
+      </a>
+      <LanguageSwitch locale={locale} pathname={pathname} />
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,48 @@
+---
+import { t, type Locale } from '~/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<div class="grid gap-6 md:grid-cols-2">
+  <figure class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+    <svg viewBox="0 0 240 80" role="img" aria-label={t(locale, 'line.pointsLabel')}>
+      <circle cx="28" cy="54" r="6" fill="var(--color-fg-muted)"></circle>
+      <circle cx="76" cy="26" r="6" fill="var(--color-fg-muted)"></circle>
+      <circle cx="124" cy="58" r="6" fill="var(--color-fg-muted)"></circle>
+      <circle cx="168" cy="34" r="6" fill="var(--color-fg-muted)"></circle>
+      <circle cx="212" cy="50" r="6" fill="var(--color-fg-muted)"></circle>
+    </svg>
+    <figcaption class="text-fg-muted mt-3 text-center font-mono text-xs">
+      {t(locale, 'line.pointsLabel')}
+    </figcaption>
+  </figure>
+  <figure class="border-border-subtle bg-bg-elev-1 rounded-xl border p-6">
+    <svg viewBox="0 0 240 80" role="img" aria-label={t(locale, 'line.lineLabel')}>
+      <defs>
+        <linearGradient id="line-grad" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="var(--color-accent-blue)"></stop>
+          <stop offset="1" stop-color="var(--color-accent-violet)"></stop>
+        </linearGradient>
+      </defs>
+      <path
+        d="M28 58 L76 48 L124 40 L168 30 L212 22"
+        stroke="url(#line-grad)"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"></path>
+      <circle cx="28" cy="58" r="6" fill="var(--color-accent-blue)"></circle>
+      <circle cx="76" cy="48" r="6" fill="var(--color-accent-blue)"></circle>
+      <circle cx="124" cy="40" r="6" fill="var(--color-accent-blue)"></circle>
+      <circle cx="168" cy="30" r="6" fill="var(--color-accent-violet)"></circle>
+      <circle cx="212" cy="22" r="6" fill="var(--color-accent-violet)"></circle>
+    </svg>
+    <figcaption class="text-fg-muted mt-3 text-center font-mono text-xs">
+      {t(locale, 'line.lineLabel')}
+    </figcaption>
+  </figure>
+</div>
