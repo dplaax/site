@@ -139,6 +139,14 @@ const { locale } = Astro.props;
   </p>
   <div class="mt-8 grid gap-6 md:grid-cols-3">
     <a
+      href={links.paperProof}
+      class="border-border-subtle hover:border-border-strong block rounded-xl border p-6"
+    >
+      <h3 class="text-lg">{t(locale, 'research.proof.title')}</h3>
+      <p class="text-fg-muted mt-3 text-sm">{t(locale, 'research.proof.desc')}</p>
+      <p class="text-accent-blue mt-4 font-mono text-xs">DOI 10.5281/zenodo.21853326</p>
+    </a>
+    <a
       href={links.paperProvenance}
       class="border-border-subtle hover:border-border-strong block rounded-xl border p-6"
     >
