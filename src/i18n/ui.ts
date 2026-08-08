@@ -90,6 +90,9 @@ const strings = {
     'research.heading': 'Research behind the design',
     'research.lead':
       'The design builds on established provenance research: connected provenance supports trust decisions, error investigation, responsibility tracing, audit, and reproducibility.',
+    'research.proof.title': 'Provenance-Based Data Acceptance in Cross-Organizational Pipelines',
+    'research.proof.desc':
+      'The dPLaaX systems paper: design, implementation, and evaluation of the protocol and the provin reference runtime — attributable, fail-closed acceptance at the point of delivery. Preprint.',
     'research.dplaax.title': 'Cryptographic Provenance Attestation in Data Pipelines',
     'research.dplaax.desc':
       'The dPLaaX foundation: signed process-boundary records for independently verifiable, cross-organizational data provenance.',
@@ -191,6 +194,9 @@ const strings = {
     'research.heading': '設計の根拠となる研究',
     'research.lead':
       '来歴研究では、つながった来歴が信頼判断、エラー調査、責任主体の追跡、監査、再現性に役立つことが示されている。dPLaaX はこれを組織間のデータフローで暗号的に検証できる形にする。',
+    'research.proof.title': 'Provenance-Based Data Acceptance in Cross-Organizational Pipelines',
+    'research.proof.desc':
+      'dPLaaX の実証論文。プロトコルと参照実装 provin の設計・実装・評価により、配送時点での帰属可能なフェイルクローズド受理を三組織構成で検証する（プレプリント）。',
     'research.dplaax.title': 'Cryptographic Provenance Attestation in Data Pipelines',
     'research.dplaax.desc':
       'dPLaaX の基礎論文。組織をまたぐデータ来歴を第三者が検証するための、プロセス境界単位の署名記録を提案する。',
@@ -225,6 +231,7 @@ export const links = {
   contributing: 'https://github.com/dplaax/spec/blob/main/CONTRIBUTING.md',
   org: 'https://github.com/dplaax',
   provin: 'https://github.com/provin-line',
+  paperProof: 'https://doi.org/10.5281/zenodo.21853326',
   paperProvenance: 'https://doi.org/10.5281/zenodo.20042030',
   w3cProv: 'https://www.w3.org/TR/prov-primer/',
   paperDecision: 'https://doi.org/10.1109/ACCESS.2018.2887201',
