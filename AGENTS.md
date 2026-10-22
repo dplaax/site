@@ -33,7 +33,7 @@ All copy — both locales — lives in [src/i18n/ui.ts](src/i18n/ui.ts) as typed
 
 ### Dependencies
 
-- `vite` is a **deliberate** direct devDependency: `@tailwindcss/vite`'s peer range spans vite majors, so a fresh install without the pin can resolve a different vite major than the one `astro` bundles (7 vs 8) — `astro check` then fails with plugin type mismatches. When upgrading astro, keep the pin aligned with astro's own vite major.
+- `vite` is a **deliberate** direct devDependency: `@tailwindcss/vite`'s peer range spans vite majors, so a fresh install without the pin can resolve a different vite major than the one `astro` bundles — `astro check` then fails with plugin type mismatches. When upgrading astro, keep the pin aligned with astro's own vite major.
 
 ### Constraints
 
