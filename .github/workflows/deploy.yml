@@ -23,9 +23,13 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+      # check-latest resolves the newest Node 22 release from the release
+      # manifest; without it setup-node uses any 22.x cached on the runner,
+      # which can predate a security release.
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22'
+          check-latest: true
           cache: npm
       - run: npm ci
       - run: npm run build
