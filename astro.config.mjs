@@ -7,6 +7,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://www.dplaax.dev',
   output: 'static',
+  // astro 7's default ('jsx') drops whitespace that spans a line break between
+  // elements, so inline elements on separate lines lose their space; true
+  // collapses whitespace without changing what renders.
+  compressHTML: true,
   trailingSlash: 'never',
   i18n: {
     defaultLocale: 'en',
@@ -28,5 +32,11 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Tailwind v4's browser floor. Without it vite's CSS minifier targets
+      // esnext and drops prefixes such as -webkit-backdrop-filter, which
+      // Safari before 18 needs.
+      cssTarget: ['chrome111', 'edge111', 'firefox128', 'safari16.4', 'ios16.4'],
+    },
   },
 });
