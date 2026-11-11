@@ -104,7 +104,7 @@ const strings = {
       'Research on exposing cross-system data flows to support oversight, audit, compliance, risk mitigation, and accountability.',
     'status.heading': 'Status',
     'status.body':
-      'v0.1 is a draft. Wire rules and schemas may change as feedback from the reference implementation is incorporated. Development is public, and review and contributions are welcome.',
+      'v0.2.0-alpha.1 is a pre-release, and every rule is still a draft. Wire rules and schemas may change as feedback from the reference implementation is incorporated. Development is public, and review and contributions are welcome.',
     'status.cta': 'Contribute on GitHub',
     'notFound.title': 'Page not found',
     'notFound.body': 'The page you are looking for does not exist.',
@@ -208,7 +208,7 @@ const strings = {
       'システムや組織をまたぐデータフローの可視化が、監督、監査、コンプライアンス、リスク低減、説明責任にどう役立つかを論じる研究。',
     'status.heading': 'ステータス',
     'status.body':
-      'v0.1 は draft。リファレンス実装からのフィードバックを反映する過程で、ワイヤルールやスキーマは変更される可能性がある。開発は公開で進めており、レビューとコントリビューションを歓迎する。',
+      'v0.2.0-alpha.1 は pre-release で、rule はすべて draft。リファレンス実装からのフィードバックを反映する過程で、ワイヤルールやスキーマは変更される可能性がある。開発は公開で進めており、レビューとコントリビューションを歓迎する。',
     'status.cta': 'GitHub でコントリビュート',
     'notFound.title': 'ページが見つかりません',
     'notFound.body': 'お探しのページは存在しません。',
