@@ -41,6 +41,17 @@ All copy — both locales — lives in [src/i18n/ui.ts](src/i18n/ui.ts) as typed
 - Do not add analytics, trackers, or third-party scripts without explicit approval.
 - Do not make claims about certification, compliance, or guarantees beyond what the spec's own README/concept states. The "promises / does not promise" section mirrors spec language deliberately.
 
+### Analytics
+
+- The site loads one Google Tag Manager container, whose ID is `PUBLIC_GTM_ID` in the committed `.env.production`. Only `src/analytics.ts` reads it. The tag, the consent banner and the privacy page all follow it. With the ID empty or unset, there is no tag and no banner, and the privacy page says the site loads no analytics.
+- The container may hold only Google Analytics 4, measurement ID `G-034LKCPDW9`. Any other tag counts as an analytics or third-party script under the constraint above and needs the same approval. A tag added in Tag Manager does not pass through this repository's review.
+- When the container changes, update the privacy copy (`privacy.*` in `src/i18n/ui.ts`) and its last-updated date (`privacy.updated`) to match.
+- Consent Mode v2: `Analytics.astro` sets all four consent types to denied before `gtm.js` loads. The banner grants `analytics_storage` only. The choice is kept in localStorage under the key in `src/consent.ts`.
+- Local builds:
+  - The tag loads only in a production-mode build with the ID set. `npm run dev` never loads it.
+  - `npm run build` reads `.env.production`, so `npm run preview` of that build sends hits from localhost to the production property. To check a build locally without sending hits, run `PUBLIC_GTM_ID= npm run build`.
+  - To read the privacy page with its analytics sections without loading the tag, run `PUBLIC_GTM_ID=GTM-K4X7SH7C npm run dev`.
+
 ## Commands Cheat Sheet
 
 ```bash

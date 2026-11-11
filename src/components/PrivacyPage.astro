@@ -1,6 +1,8 @@
 ---
 // The privacy page: what the analytics BaseLayout loads collect, and how a
-// visitor changes the choice made in the consent banner.
+// visitor changes the choice made in the consent banner. Without a container
+// ID it says that the site loads no analytics.
+import { gtmId } from '~/analytics';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { gaOptOutLink, googlePartnerSitesLink, links, t, type Locale } from '~/i18n/ui';
 
@@ -9,6 +11,8 @@ interface Props {
 }
 
 const { locale } = Astro.props;
+const hasAnalytics = gtmId !== '';
+const analyticsBody = t(locale, 'privacy.analytics.body').replace('{gtmId}', gtmId);
 ---
 
 <BaseLayout
@@ -24,46 +28,56 @@ const { locale } = Astro.props;
     </header>
 
     <div class="privacy-copy mt-14 max-w-3xl">
-      <section>
-        <h2>{t(locale, 'privacy.analytics.heading')}</h2>
-        <p>{t(locale, 'privacy.analytics.body')}</p>
-      </section>
+      {
+        hasAnalytics ? (
+          <Fragment>
+            <section>
+              <h2>{t(locale, 'privacy.analytics.heading')}</h2>
+              <p>{analyticsBody}</p>
+            </section>
 
-      <section>
-        <h2>{t(locale, 'privacy.data.heading')}</h2>
-        <p>{t(locale, 'privacy.data.body')}</p>
-      </section>
+            <section>
+              <h2>{t(locale, 'privacy.data.heading')}</h2>
+              <p>{t(locale, 'privacy.data.body')}</p>
+            </section>
 
-      <section>
-        <h2>{t(locale, 'privacy.google.heading')}</h2>
-        <p>{t(locale, 'privacy.google.body')}</p>
-        <a href={googlePartnerSitesLink(locale)} rel="noopener noreferrer" target="_blank">
-          {t(locale, 'privacy.google.link')} ↗
-        </a>
-      </section>
+            <section>
+              <h2>{t(locale, 'privacy.google.heading')}</h2>
+              <p>{t(locale, 'privacy.google.body')}</p>
+              <a href={googlePartnerSitesLink(locale)} rel="noopener noreferrer" target="_blank">
+                {t(locale, 'privacy.google.link')} ↗
+              </a>
+            </section>
 
-      <section>
-        <h2>{t(locale, 'privacy.choice.heading')}</h2>
-        <p>{t(locale, 'privacy.choice.body')}</p>
-        <div class="mt-5 flex flex-wrap gap-4">
-          <button
-            id="reset-analytics-consent"
-            type="button"
-            data-message={t(locale, 'privacy.choice.resetDone')}
-            class="border-border-strong text-fg-primary hover:border-accent-blue hover:text-accent-blue rounded-full border px-5 py-2 text-sm transition"
-          >
-            {t(locale, 'privacy.choice.reset')}
-          </button>
-          <a
-            href={gaOptOutLink(locale)}
-            rel="noopener noreferrer"
-            target="_blank"
-            class="self-center text-sm"
-          >
-            {t(locale, 'privacy.choice.optOut')} ↗
-          </a>
-        </div>
-      </section>
+            <section>
+              <h2>{t(locale, 'privacy.choice.heading')}</h2>
+              <p>{t(locale, 'privacy.choice.body')}</p>
+              <div class="mt-5 flex flex-wrap gap-4">
+                <button
+                  id="reset-analytics-consent"
+                  type="button"
+                  data-message={t(locale, 'privacy.choice.resetDone')}
+                  class="border-border-strong text-fg-primary hover:border-accent-blue hover:text-accent-blue rounded-full border px-5 py-2 text-sm transition"
+                >
+                  {t(locale, 'privacy.choice.reset')}
+                </button>
+                <a
+                  href={gaOptOutLink(locale)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="self-center text-sm"
+                >
+                  {t(locale, 'privacy.choice.optOut')} ↗
+                </a>
+              </div>
+            </section>
+          </Fragment>
+        ) : (
+          <section>
+            <p>{t(locale, 'privacy.noAnalytics')}</p>
+          </section>
+        )
+      }
 
       <section>
         <h2>{t(locale, 'privacy.operator.heading')}</h2>

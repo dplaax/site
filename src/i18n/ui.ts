@@ -117,16 +117,17 @@ const strings = {
     'consent.details': 'Learn more',
     'consent.accept': 'Accept',
     'consent.decline': 'Continue without cookies',
+    'consent.label': 'Analytics consent',
     'privacy.title': 'Privacy',
     'privacy.description': 'How the dPLaaX website uses analytics and handles related data.',
     'privacy.lead': 'How this website, www.dplaax.dev, uses analytics and handles related data.',
     'privacy.updated': 'Last updated: November 11, 2026',
     'privacy.analytics.heading': 'Google Tag Manager and Google Analytics',
     'privacy.analytics.body':
-      'This website loads Google Tag Manager (container GTM-K4X7SH7C), which runs Google Analytics 4 (measurement ID G-034LKCPDW9) to understand how the site is used and to improve its content. Analytics cookies are not stored until you select “Accept” in the notice at the bottom of the page. The website never grants consent for advertising storage, ad user data, or ad personalization.',
+      'This website loads Google Tag Manager (container {gtmId}), which runs Google Analytics 4 (measurement ID G-034LKCPDW9) to understand how the site is used and to improve its content. Analytics cookies are not stored until you select “Accept” in the notice at the bottom of the page. The website never grants consent for advertising storage, ad user data, or ad personalization.',
     'privacy.data.heading': 'Information sent',
     'privacy.data.body':
-      'Before consent, or after you choose to continue without cookies, Google may receive cookieless measurement signals containing the pages you view, the referring page, and browser or device information. After consent, a client ID stored in a cookie is also used for measurement. Besides page views, the container measures scrolling, clicks on links to other sites, file downloads, site searches, and video and form interactions. This website has no forms and does not send names, email addresses, or other directly identifying information to Google Analytics.',
+      'Before consent, or after you choose to continue without cookies, Google may receive cookieless measurement signals containing the pages you view, the referring page, and browser or device information. After consent, a client ID stored in a cookie is also used for measurement. Besides page views, the container is configured to measure scrolling, clicks on links to other sites, file downloads, site searches, and video and form interactions. This website has no forms and does not send names, email addresses, or other directly identifying information to Google Analytics.',
     'privacy.google.heading': 'How Google handles data',
     'privacy.google.body':
       'Google processes the information under its terms and privacy policy. For details, see “How Google uses information from sites or apps that use our services.”',
@@ -141,6 +142,7 @@ const strings = {
     'privacy.operator.body':
       'This website is operated by 1o1 Co. Ltd., the maintainer of the dPLaaX specification. For website inquiries, please use the dplaax organization on GitHub.',
     'privacy.operator.contact': 'dplaax on GitHub',
+    'privacy.noAnalytics': 'This website loads no analytics or other third-party scripts.',
   },
   ja: {
     'site.title': 'dPLaaX — 組織をまたぐデータ来歴を検証可能に',
@@ -251,6 +253,7 @@ const strings = {
     'consent.details': '詳しく見る',
     'consent.accept': '同意する',
     'consent.decline': 'Cookie なしで続ける',
+    'consent.label': 'アクセス解析への同意',
     'privacy.title': 'プライバシー',
     'privacy.description': 'dPLaaX ウェブサイトにおけるアクセス解析とデータの取り扱いについて。',
     'privacy.lead':
@@ -258,10 +261,10 @@ const strings = {
     'privacy.updated': '最終更新：2026年11月11日',
     'privacy.analytics.heading': 'Google タグマネージャーと Google Analytics の利用',
     'privacy.analytics.body':
-      '当サイトは、利用状況を把握し、内容を改善するために Google タグマネージャー（コンテナ GTM-K4X7SH7C）を読み込み、そこから Google Analytics 4（測定 ID G-034LKCPDW9）を動かします。画面下部の案内で「同意する」を選ぶまで、Analytics の Cookie は保存されません。広告用のストレージ、広告用のユーザーデータ、広告のパーソナライズへの同意は、当サイトでは常に拒否のままです。',
+      '当サイトは、利用状況を把握し、内容を改善するために Google タグマネージャー（コンテナ {gtmId}）を読み込み、それを通じて Google Analytics 4（測定 ID G-034LKCPDW9）を読み込みます。画面下部の案内で「同意する」を選ぶまで、Analytics の Cookie は保存されません。広告用のストレージ、広告用のユーザーデータ、広告のパーソナライズへの同意は、当サイトでは常に拒否のままです。',
     'privacy.data.heading': '送信される情報',
     'privacy.data.body':
-      '同意前、または「Cookie なしで続ける」を選んだあとも、閲覧したページ、参照元、ブラウザーや端末に関する情報などを含む、Cookie を使わない計測信号が Google に送信される場合があります。同意後は、Cookie に保存されるクライアント ID も計測に使われます。コンテナは、ページの閲覧のほか、スクロール、外部サイトへのリンクのクリック、ファイルのダウンロード、サイト内検索、動画とフォームの操作を計測します。当サイトにはフォームが無く、氏名やメールアドレスなどを Google Analytics に送信することはありません。',
+      '同意前、または「Cookie なしで続ける」を選んだあとも、閲覧したページ、参照元、ブラウザーや端末に関する情報などを含む、Cookie を使わない計測信号が Google に送信される場合があります。同意後は、Cookie に保存されるクライアント ID も計測に使われます。コンテナは、ページの閲覧のほか、スクロール、外部サイトへのリンクのクリック、ファイルのダウンロード、サイト内検索、動画とフォームの操作を計測するよう設定されています。当サイトにはフォームが無く、氏名やメールアドレスなどを Google Analytics に送信することはありません。',
     'privacy.google.heading': 'Google によるデータの取り扱い',
     'privacy.google.body':
       '送信された情報は、Google の利用規約とプライバシーポリシーに基づいて処理されます。詳しくは、Google の「サービスを使用するサイトやアプリから収集した情報の Google による使用」をご確認ください。',
@@ -276,6 +279,8 @@ const strings = {
     'privacy.operator.body':
       '当サイトは、dPLaaX 仕様の maintainer である株式会社 1o1 が運営しています。サイトに関するお問い合わせは、GitHub の dplaax organization からお願いします。',
     'privacy.operator.contact': 'GitHub の dplaax',
+    'privacy.noAnalytics':
+      '当サイトは、アクセス解析も、そのほかの第三者のスクリプトも読み込みません。',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 
