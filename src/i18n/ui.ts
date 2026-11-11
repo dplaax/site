@@ -111,6 +111,36 @@ const strings = {
     'notFound.back': 'Back to top',
     'footer.copyright': '© 2026 The dPLaaX Authors',
     'footer.tagline': 'verifiable provenance across boundaries',
+    'footer.privacy': 'Privacy',
+    'consent.message':
+      'We use Google Analytics, through Google Tag Manager, to understand site usage. Allow analytics cookies?',
+    'consent.details': 'Learn more',
+    'consent.accept': 'Accept',
+    'consent.decline': 'Continue without cookies',
+    'privacy.title': 'Privacy',
+    'privacy.description': 'How the dPLaaX website uses analytics and handles related data.',
+    'privacy.lead': 'How this website, www.dplaax.dev, uses analytics and handles related data.',
+    'privacy.updated': 'Last updated: November 11, 2026',
+    'privacy.analytics.heading': 'Google Tag Manager and Google Analytics',
+    'privacy.analytics.body':
+      'This website loads Google Tag Manager (container GTM-K4X7SH7C), which runs Google Analytics 4 (measurement ID G-034LKCPDW9) to understand how the site is used and to improve its content. Analytics cookies are not stored until you select “Accept” in the notice at the bottom of the page. The website never grants consent for advertising storage, ad user data, or ad personalization.',
+    'privacy.data.heading': 'Information sent',
+    'privacy.data.body':
+      'Before consent, or after you choose to continue without cookies, Google may receive cookieless measurement signals containing the pages you view, the referring page, and browser or device information. After consent, a client ID stored in a cookie is also used for measurement. Besides page views, the container measures scrolling, clicks on links to other sites, file downloads, site searches, and video and form interactions. This website has no forms and does not send names, email addresses, or other directly identifying information to Google Analytics.',
+    'privacy.google.heading': 'How Google handles data',
+    'privacy.google.body':
+      'Google processes the information under its terms and privacy policy. For details, see “How Google uses information from sites or apps that use our services.”',
+    'privacy.google.link': 'How Google uses information',
+    'privacy.choice.heading': 'Changing your choice or opting out',
+    'privacy.choice.body':
+      'If you choose “Continue without cookies,” Analytics cookies are not used. Reset your choice below to decide again. The Google Analytics Opt-out Browser Add-on stops measurement, including cookieless signals.',
+    'privacy.choice.reset': 'Reset analytics choice',
+    'privacy.choice.resetDone': 'Your choice has been reset. The page will now reload.',
+    'privacy.choice.optOut': 'Google Analytics Opt-out Browser Add-on',
+    'privacy.operator.heading': 'Operator and contact',
+    'privacy.operator.body':
+      'This website is operated by 1o1 Co. Ltd., the maintainer of the dPLaaX specification. For website inquiries, please use the dplaax organization on GitHub.',
+    'privacy.operator.contact': 'dplaax on GitHub',
   },
   ja: {
     'site.title': 'dPLaaX — 組織をまたぐデータ来歴を検証可能に',
@@ -215,6 +245,37 @@ const strings = {
     'notFound.back': 'トップへ戻る',
     'footer.copyright': '© 2026 The dPLaaX Authors',
     'footer.tagline': '組織をまたぐデータ来歴を検証可能に',
+    'footer.privacy': 'プライバシー',
+    'consent.message':
+      'アクセス状況の把握に、Google タグマネージャー経由で Google Analytics を使用します。Cookie を使った計測に同意しますか？',
+    'consent.details': '詳しく見る',
+    'consent.accept': '同意する',
+    'consent.decline': 'Cookie なしで続ける',
+    'privacy.title': 'プライバシー',
+    'privacy.description': 'dPLaaX ウェブサイトにおけるアクセス解析とデータの取り扱いについて。',
+    'privacy.lead':
+      '当サイト（www.dplaax.dev）における、アクセス解析とデータの取り扱いについて説明します。',
+    'privacy.updated': '最終更新：2026年11月11日',
+    'privacy.analytics.heading': 'Google タグマネージャーと Google Analytics の利用',
+    'privacy.analytics.body':
+      '当サイトは、利用状況を把握し、内容を改善するために Google タグマネージャー（コンテナ GTM-K4X7SH7C）を読み込み、そこから Google Analytics 4（測定 ID G-034LKCPDW9）を動かします。画面下部の案内で「同意する」を選ぶまで、Analytics の Cookie は保存されません。広告用のストレージ、広告用のユーザーデータ、広告のパーソナライズへの同意は、当サイトでは常に拒否のままです。',
+    'privacy.data.heading': '送信される情報',
+    'privacy.data.body':
+      '同意前、または「Cookie なしで続ける」を選んだあとも、閲覧したページ、参照元、ブラウザーや端末に関する情報などを含む、Cookie を使わない計測信号が Google に送信される場合があります。同意後は、Cookie に保存されるクライアント ID も計測に使われます。コンテナは、ページの閲覧のほか、スクロール、外部サイトへのリンクのクリック、ファイルのダウンロード、サイト内検索、動画とフォームの操作を計測します。当サイトにはフォームが無く、氏名やメールアドレスなどを Google Analytics に送信することはありません。',
+    'privacy.google.heading': 'Google によるデータの取り扱い',
+    'privacy.google.body':
+      '送信された情報は、Google の利用規約とプライバシーポリシーに基づいて処理されます。詳しくは、Google の「サービスを使用するサイトやアプリから収集した情報の Google による使用」をご確認ください。',
+    'privacy.google.link': 'Google による情報の使用について',
+    'privacy.choice.heading': '同意の変更・計測の停止',
+    'privacy.choice.body':
+      '「Cookie なしで続ける」を選ぶと、Analytics の Cookie は使われません。下のボタンで選択をリセットすると、もう一度選び直せます。Google Analytics オプトアウト アドオンを使えば、Cookie を使わない計測を含めて停止できます。',
+    'privacy.choice.reset': 'Analytics の選択をリセット',
+    'privacy.choice.resetDone': '選択をリセットしました。ページを再読み込みします。',
+    'privacy.choice.optOut': 'Google Analytics オプトアウト アドオン',
+    'privacy.operator.heading': '運営・お問い合わせ',
+    'privacy.operator.body':
+      '当サイトは、dPLaaX 仕様の maintainer である株式会社 1o1 が運営しています。サイトに関するお問い合わせは、GitHub の dplaax organization からお願いします。',
+    'privacy.operator.contact': 'GitHub の dplaax',
   },
 } as const satisfies Record<Locale, Record<string, string>>;
 
@@ -235,8 +296,20 @@ export const links = {
   paperProvenance: 'https://doi.org/10.5281/zenodo.20042030',
   w3cProv: 'https://www.w3.org/TR/prov-primer/',
   paperDecision: 'https://doi.org/10.1109/ACCESS.2018.2887201',
+  googlePartnerSites: 'https://policies.google.com/technologies/partner-sites?hl=en',
+  googlePartnerSitesJa: 'https://policies.google.com/technologies/partner-sites?hl=ja',
+  gaOptOut: 'https://tools.google.com/dlpage/gaoptout?hl=en',
+  gaOptOutJa: 'https://tools.google.com/dlpage/gaoptout?hl=ja',
 } as const;
 
 export function conceptLink(locale: Locale): string {
   return locale === 'ja' ? links.conceptJa : links.concept;
+}
+
+export function googlePartnerSitesLink(locale: Locale): string {
+  return locale === 'ja' ? links.googlePartnerSitesJa : links.googlePartnerSites;
+}
+
+export function gaOptOutLink(locale: Locale): string {
+  return locale === 'ja' ? links.gaOptOutJa : links.gaOptOut;
 }

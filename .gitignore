@@ -13,9 +13,8 @@ yarn-error.log*
 pnpm-debug.log*
 
 
-# environment variables
+# environment variables (.env.production is committed: it holds no secrets)
 .env
-.env.production
 
 # machine-local deploy config (see local.mk.example)
 local.mk

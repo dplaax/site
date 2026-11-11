@@ -1,0 +1,91 @@
+---
+// The consent banner for Google Tag Manager's Consent Mode v2.
+//
+// Shown until the visitor chooses. "Accept" grants analytics_storage;
+// "Continue without cookies" leaves it denied. The choice is kept in
+// localStorage, so a returning visitor is not asked again; the privacy page
+// can reset it.
+import { consentStorageKey } from '~/consent';
+import { t, type Locale } from '~/i18n/ui';
+import { localizedPath } from '~/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const privacy = localizedPath(locale, '/privacy');
+---
+
+<div
+  id="consent-banner"
+  hidden
+  class="border-border-subtle bg-bg-elev-1 fixed inset-x-0 bottom-0 z-50 border-t px-5 py-4"
+>
+  <div class="mx-auto flex max-w-4xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-fg-muted text-sm">
+      {t(locale, 'consent.message')}
+      <a href={privacy} class="ml-1 underline underline-offset-2">
+        {t(locale, 'consent.details')}
+      </a>
+    </p>
+    <div class="flex shrink-0 gap-2">
+      <button
+        id="consent-decline"
+        type="button"
+        class="border-border-strong text-fg-primary hover:text-fg-strong rounded-full border px-4 py-1.5 text-sm transition"
+      >
+        {t(locale, 'consent.decline')}
+      </button>
+      <button
+        id="consent-accept"
+        type="button"
+        class="border-accent-blue text-accent-blue hover:bg-accent-blue hover:text-fg-inverse rounded-full border px-4 py-1.5 text-sm transition"
+      >
+        {t(locale, 'consent.accept')}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ key: consentStorageKey }}>
+  (function () {
+    var banner = document.getElementById('consent-banner');
+    if (!banner) return;
+
+    var stored = null;
+    try {
+      stored = localStorage.getItem(key);
+    } catch (e) {
+      // localStorage blocked: show the banner; consent stays denied.
+    }
+    if (stored !== 'granted' && stored !== 'denied') {
+      banner.hidden = false;
+    }
+
+    function choose(value) {
+      try {
+        localStorage.setItem(key, value);
+      } catch (e) {
+        // The choice holds for this page view only.
+      }
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          analytics_storage: value === 'granted' ? 'granted' : 'denied',
+        });
+      }
+      banner.hidden = true;
+    }
+
+    var accept = document.getElementById('consent-accept');
+    var decline = document.getElementById('consent-decline');
+    if (accept)
+      accept.addEventListener('click', function () {
+        choose('granted');
+      });
+    if (decline)
+      decline.addEventListener('click', function () {
+        choose('denied');
+      });
+  })();
+</script>

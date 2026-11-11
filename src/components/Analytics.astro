@@ -1,0 +1,42 @@
+---
+// Google Tag Manager with Consent Mode v2.
+//
+// BaseLayout renders this only in a production build with PUBLIC_GTM_ID set.
+// The bootstrap runs before gtm.js loads: all four consent types default to
+// denied, and a stored opt-in grants analytics_storage only. The advertising
+// types are never granted.
+import { consentStorageKey } from '~/consent';
+
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const bootstrap = `
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+window.gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied'
+});
+try {
+  if (localStorage.getItem(${JSON.stringify(consentStorageKey)}) === 'granted') {
+    window.gtag('consent', 'update', { analytics_storage: 'granted' });
+  }
+} catch (e) {
+  // localStorage blocked: analytics storage stays denied.
+}
+window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+`;
+---
+
+{
+  gtmId && (
+    <Fragment>
+      <script is:inline set:html={bootstrap} />
+      <script
+        is:inline
+        async
+        src={`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`}
+      />
+    </Fragment>
+  )
+}
