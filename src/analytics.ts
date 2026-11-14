@@ -9,3 +9,9 @@ export const gtmId: string = import.meta.env.PUBLIC_GTM_ID ?? '';
 // `astro build --mode <other>` never load gtm.js or send hits.
 export const analyticsEnabled: boolean =
   import.meta.env.PROD && import.meta.env.MODE === 'production' && gtmId !== '';
+
+// The only host the tag runs on: the hostname of `site` in astro.config.mjs.
+// A page served from any other host (localhost, a preview) does not load
+// gtm.js, and the Google tag keeps its cookies on this host instead of the
+// parent domain.
+export const analyticsHost: string = new URL(import.meta.env.SITE).hostname;

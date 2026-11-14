@@ -6,8 +6,13 @@
 // opt-in grants analytics_storage only. The advertising types are never
 // granted. The page then follows the stored choice: when another tab changes
 // or clears it, and when the page is restored from the back/forward cache.
-import { gtmId } from '~/analytics';
+//
+// The Google tag keeps its cookies on analyticsHost, and gtm.js is loaded
+// only when the page is served from that host.
+import { analyticsHost, gtmId } from '~/analytics';
 import { consentStorageKey } from '~/consent';
+
+const gtmSrc = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
 
 const bootstrap = `
 window.dataLayer = window.dataLayer || [];
@@ -41,19 +46,16 @@ window.gtag('consent', 'default', {
     if (e.persisted) follow();
   });
 })();
-window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+window.gtag('set', { cookie_domain: ${JSON.stringify(analyticsHost)} });
+(function () {
+  if (window.location.hostname !== ${JSON.stringify(analyticsHost)}) return;
+  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = ${JSON.stringify(gtmSrc)};
+  document.head.appendChild(script);
+})();
 `;
 ---
 
-{
-  gtmId && (
-    <Fragment>
-      <script is:inline set:html={bootstrap} />
-      <script
-        is:inline
-        async
-        src={`https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`}
-      />
-    </Fragment>
-  )
-}
+{gtmId && <script is:inline set:html={bootstrap} />}
