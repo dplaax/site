@@ -1,0 +1,134 @@
+---
+// The privacy page: what the analytics BaseLayout loads collect, and how a
+// visitor changes the choice made in the consent banner. Without a Google tag
+// ID it says that the site loads no analytics.
+import { gtmId } from '~/analytics';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { gaOptOutLink, googlePartnerSitesLink, links, t, type Locale } from '~/i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const hasAnalytics = gtmId !== '';
+const analyticsBody = t(locale, 'privacy.analytics.body').replace('{gtmId}', gtmId);
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${t(locale, 'privacy.title')} — dPLaaX`}
+  description={t(locale, 'privacy.description')}
+>
+  <article class="container-page py-20 md:py-28">
+    <header class="max-w-3xl">
+      <h1>{t(locale, 'privacy.title')}</h1>
+      <p class="text-fg-muted mt-5 text-lg">{t(locale, 'privacy.lead')}</p>
+      <p class="text-fg-muted mt-3 text-xs">{t(locale, 'privacy.updated')}</p>
+    </header>
+
+    <div class="privacy-copy mt-14 max-w-3xl">
+      {
+        hasAnalytics ? (
+          <Fragment>
+            <section>
+              <h2>{t(locale, 'privacy.analytics.heading')}</h2>
+              <p>{analyticsBody}</p>
+            </section>
+
+            <section>
+              <h2>{t(locale, 'privacy.data.heading')}</h2>
+              <p>{t(locale, 'privacy.data.body')}</p>
+            </section>
+
+            <section>
+              <h2>{t(locale, 'privacy.google.heading')}</h2>
+              <p>{t(locale, 'privacy.google.body')}</p>
+              <a href={googlePartnerSitesLink(locale)} rel="noopener noreferrer" target="_blank">
+                {t(locale, 'privacy.google.link')} ↗
+              </a>
+            </section>
+
+            <section>
+              <h2>{t(locale, 'privacy.choice.heading')}</h2>
+              <p>{t(locale, 'privacy.choice.body')}</p>
+              <div class="mt-5 flex flex-wrap gap-4">
+                <button
+                  id="reset-analytics-consent"
+                  type="button"
+                  data-message={t(locale, 'privacy.choice.resetDone')}
+                  class="border-border-strong text-fg-primary hover:border-accent-blue hover:text-accent-blue rounded-full border px-5 py-2 text-sm transition"
+                >
+                  {t(locale, 'privacy.choice.reset')}
+                </button>
+                <a
+                  href={gaOptOutLink(locale)}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="self-center text-sm"
+                >
+                  {t(locale, 'privacy.choice.optOut')} ↗
+                </a>
+              </div>
+            </section>
+          </Fragment>
+        ) : (
+          <section>
+            <p>{t(locale, 'privacy.noAnalytics')}</p>
+          </section>
+        )
+      }
+
+      <section>
+        <h2>{t(locale, 'privacy.operator.heading')}</h2>
+        <p>{t(locale, 'privacy.operator.body')}</p>
+        <a href={links.org} rel="noopener noreferrer" target="_blank">
+          {t(locale, 'privacy.operator.contact')} ↗
+        </a>
+      </section>
+    </div>
+  </article>
+
+  <script>
+    import { consentStorageKey } from '~/consent';
+
+    const reset = document.getElementById('reset-analytics-consent');
+    reset?.addEventListener('click', () => {
+      try {
+        localStorage.removeItem(consentStorageKey);
+      } catch {
+        // Storage unavailable: nothing was stored, and reloading is still safe.
+      }
+      const message = reset.dataset.message;
+      if (message) window.alert(message);
+      window.location.reload();
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .privacy-copy {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .privacy-copy section {
+    border-top: 1px solid var(--color-border-subtle);
+    padding-top: 2rem;
+  }
+
+  .privacy-copy h2 {
+    font-size: 1.35rem;
+  }
+
+  .privacy-copy p {
+    color: var(--color-fg-muted);
+    margin-top: 0.75rem;
+  }
+
+  .privacy-copy section > a {
+    display: inline-block;
+    font-size: 0.875rem;
+    margin-top: 0.75rem;
+  }
+</style>

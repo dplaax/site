@@ -41,6 +41,18 @@ All copy — both locales — lives in [src/i18n/ui.ts](src/i18n/ui.ts) as typed
 - Do not add analytics, trackers, or third-party scripts without explicit approval.
 - Do not make claims about certification, compliance, or guarantees beyond what the spec's own README/concept states. The "promises / does not promise" section mirrors spec language deliberately.
 
+### Analytics
+
+- The site loads one Google tag through `gtm.js`. Its ID is `PUBLIC_GTM_ID` in the committed `.env.production`. Only `src/analytics.ts` reads it. The tag, the consent banner and the privacy page all follow it. With the ID empty or unset, there is no tag and no banner, and the privacy page says the site loads no analytics.
+- `GTM-K4X7SH7C` is the Google tag of Google Analytics 4, measurement ID `G-034LKCPDW9`. Its settings, such as enhanced measurement and user-provided data collection, are the Google tag settings in GA4, not settings in this repository. It may send only to `G-034LKCPDW9`. Any other destination or tag counts as an analytics or third-party script under the constraint above and needs the same approval. A change made in those settings does not pass through this repository's review.
+- This site's pages load the tag only on the site's host, `www.dplaax.dev`: `analyticsHost` in `src/analytics.ts`, taken from `site` in `astro.config.mjs`. `Analytics.astro` loads `gtm.js` only when the page's hostname is that host, and sets `cookie_domain` to it, so the Google tag's cookies are set on `www.dplaax.dev`, not on `.dplaax.dev`.
+- When the tag's settings change, update the privacy copy (`privacy.*` in `src/i18n/ui.ts`) and its last-updated date (`privacy.updated`) to match.
+- Consent Mode v2: `Analytics.astro` sets all four consent types to denied before `gtm.js` loads. The banner grants `analytics_storage` only. The choice is kept in localStorage under the key in `src/consent.ts`.
+- Local builds:
+  - The tag loads only in a production-mode build with the ID set, on a page served from `www.dplaax.dev`. `npm run dev` never loads it.
+  - `npm run build` reads `.env.production`, so its pages show the consent banner. Served from any other host, such as `npm run preview` on localhost, they do not load `gtm.js` and send no hits.
+  - To read the privacy page with its analytics sections without loading the tag, run `PUBLIC_GTM_ID=GTM-K4X7SH7C npm run dev`.
+
 ## Commands Cheat Sheet
 
 ```bash

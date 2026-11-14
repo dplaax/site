@@ -1,5 +1,6 @@
 ---
 import { t, type Locale } from '~/i18n/ui';
+import { localizedPath } from '~/i18n/utils';
 
 interface Props {
   locale: Locale;
@@ -17,6 +18,9 @@ const { locale } = Astro.props;
       <p class="text-fg-inverse-muted mt-2 text-xs">{t(locale, 'footer.tagline')}</p>
     </div>
     <div class="text-fg-inverse-muted flex flex-col gap-1 text-xs md:items-end">
+      <a href={localizedPath(locale, '/privacy')} class="hover:text-fg-inverse">
+        {t(locale, 'footer.privacy')}
+      </a>
       <p>{t(locale, 'footer.copyright')}</p>
     </div>
   </div>

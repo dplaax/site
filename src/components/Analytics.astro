@@ -1,0 +1,61 @@
+---
+// The Google tag, loaded through gtm.js, with Consent Mode v2.
+//
+// BaseLayout renders this only when analyticsEnabled. The bootstrap runs
+// before gtm.js loads: all four consent types default to denied, and a stored
+// opt-in grants analytics_storage only. The advertising types are never
+// granted. The page then follows the stored choice: when another tab changes
+// or clears it, and when the page is restored from the back/forward cache.
+//
+// The Google tag keeps its cookies on analyticsHost, and gtm.js is loaded
+// only when the page is served from that host.
+import { analyticsHost, gtmId } from '~/analytics';
+import { consentStorageKey } from '~/consent';
+
+const gtmSrc = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(gtmId)}`;
+
+const bootstrap = `
+window.dataLayer = window.dataLayer || [];
+window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+window.gtag('consent', 'default', {
+  ad_storage: 'denied',
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  analytics_storage: 'denied'
+});
+(function () {
+  var key = ${JSON.stringify(consentStorageKey)};
+  function stored() {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      // localStorage blocked: no stored choice, so analytics storage stays denied.
+      return null;
+    }
+  }
+  function follow() {
+    window.gtag('consent', 'update', {
+      analytics_storage: stored() === 'granted' ? 'granted' : 'denied'
+    });
+  }
+  if (stored() === 'granted') follow();
+  window.addEventListener('storage', function (e) {
+    if (e.key === key || e.key === null) follow();
+  });
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) follow();
+  });
+})();
+window.gtag('set', { cookie_domain: ${JSON.stringify(analyticsHost)} });
+(function () {
+  if (window.location.hostname !== ${JSON.stringify(analyticsHost)}) return;
+  window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = ${JSON.stringify(gtmSrc)};
+  document.head.appendChild(script);
+})();
+`;
+---
+
+{gtmId && <script is:inline set:html={bootstrap} />}
