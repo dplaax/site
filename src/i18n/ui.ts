@@ -121,7 +121,7 @@ const strings = {
     'privacy.title': 'Privacy',
     'privacy.description': 'How the dPLaaX website uses analytics and handles related data.',
     'privacy.lead': 'How this website, www.dplaax.dev, uses analytics and handles related data.',
-    'privacy.updated': 'Last updated: November 11, 2026',
+    'privacy.updated': 'Last updated: November 15, 2026',
     'privacy.analytics.heading': 'Google Tag Manager and Google Analytics',
     'privacy.analytics.body':
       'This website loads Google Tag Manager (container {gtmId}), which runs Google Analytics 4 (measurement ID G-034LKCPDW9) to understand how the site is used and to improve its content. Analytics cookies are not stored until you select “Accept” in the notice at the bottom of the page. The website never grants consent for advertising storage, ad user data, or ad personalization.',
@@ -258,7 +258,7 @@ const strings = {
     'privacy.description': 'dPLaaX ウェブサイトにおけるアクセス解析とデータの取り扱いについて。',
     'privacy.lead':
       '当サイト（www.dplaax.dev）における、アクセス解析とデータの取り扱いについて説明します。',
-    'privacy.updated': '最終更新：2026年11月11日',
+    'privacy.updated': '最終更新：2026年11月15日',
     'privacy.analytics.heading': 'Google タグマネージャーと Google Analytics の利用',
     'privacy.analytics.body':
       '当サイトは、利用状況を把握し、内容を改善するために Google タグマネージャー（コンテナ {gtmId}）を読み込み、それを通じて Google Analytics 4（測定 ID G-034LKCPDW9）を読み込みます。画面下部の案内で「同意する」を選ぶまで、Analytics の Cookie は保存されません。広告用のストレージ、広告用のユーザーデータ、広告のパーソナライズへの同意は、当サイトでは常に拒否のままです。',
